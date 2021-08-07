@@ -1,0 +1,10 @@
+.section-movies {
+  width: 100vw;
+  height: 100vh;
+
+  background-image: linear-gradient(
+    to bottom,
+    $color-primary-light,
+    $color-primary-dark
+  );
+}
