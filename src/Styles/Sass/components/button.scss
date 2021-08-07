@@ -1,0 +1,24 @@
+.btn {
+  width: 17.2rem;
+  height: 5.1rem;
+
+  text-decoration: none;
+  border: none;
+
+  background: #ffffff19 0% 0% no-repeat padding-box;
+
+  box-shadow: 0px 5px 6px #00000029;
+  border-radius: 26px;
+
+  color: $color-white;
+
+  font-size: 1.6rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  &--card {
+    width: 14.8rem;
+    background: #13171d;
+  }
+}
