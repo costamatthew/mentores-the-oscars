@@ -40,7 +40,7 @@ export const HomePage = () => {
       <section className="section-movies">
         {testes.results.map((result) => (
           <CardMovie
-            img={`${base_url}${result.backdrop_path}`}
+            img={`${base_url}${result.poster_path}`}
             title={result.title}
             date={result.release_date}
           />
