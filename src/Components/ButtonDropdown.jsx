@@ -1,7 +1,14 @@
 import { useState } from "react";
+import { requests } from "../Services/requests";
 
-export const ButtonDropdown = ({ children }) => {
+export const ButtonDropdown = ({ SetTypeRequisition }) => {
   const [open, SetOpen] = useState(false);
+
+  const { fetchTopRated, fetchActionMovies, fetchComedyMovies } = requests;
+
+  function handleFilterMovie(requestName) {
+    SetTypeRequisition(requestName);
+  }
 
   function handleOpenToggle() {
     SetOpen(!open);
@@ -15,9 +22,15 @@ export const ButtonDropdown = ({ children }) => {
       {open && (
         <div className="dropdown">
           <ul>
-            <li>Ordem Alfabética</li>
-            <li>Score do IMDB</li>
-            <li>Duração</li>
+            <li onClick={() => handleFilterMovie(fetchTopRated)}>
+              Ordem Alfabética
+            </li>
+            <li onClick={() => handleFilterMovie(fetchActionMovies)}>
+              Score do IMDB
+            </li>
+            <li onClick={() => handleFilterMovie(fetchComedyMovies)}>
+              Duração
+            </li>
             <li>Número de Indicações</li>
           </ul>
         </div>

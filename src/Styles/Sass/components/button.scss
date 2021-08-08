@@ -20,5 +20,9 @@
   &--card {
     width: 14.8rem;
     background: #13171d;
+
+    &:not(:last-child) {
+      margin-right: 0.5rem;
+    }
   }
 }

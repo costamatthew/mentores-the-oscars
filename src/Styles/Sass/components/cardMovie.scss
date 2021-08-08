@@ -1,0 +1,97 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 39.7rem;
+  height: 52.6rem;
+  padding: 2rem;
+  border-radius: 0.8rem;
+  margin-top: 3rem;
+
+  &__itens {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: no-repeat center;
+    background-size: cover;
+    border-radius: 0.8rem;
+    padding: 3rem;
+
+    &--favorite {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+
+      width: 100%;
+      height: 5rem;
+      opacity: 0;
+
+      &--img {
+        width: 4.6rem;
+        height: 4.6rem;
+      }
+    }
+
+    &--title {
+      width: auto;
+      height: 2.4rem;
+
+      margin-top: 23rem;
+      margin-bottom: 0.5rem;
+
+      font-size: 2rem;
+      font-weight: 600;
+      opacity: 0;
+    }
+
+    &--date {
+      width: 17.5rem;
+      height: 1.9rem;
+      opacity: 0;
+    }
+
+    &--btn {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      width: 80%;
+      height: 10rem;
+      margin: 0 auto;
+      opacity: 0;
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      background: rgba(0, 0, 0, 0.5);
+      -moz-transition: all 0.5s;
+      -webkit-transition: all 0.5s;
+      transition: all 0.5s;
+      top: 0;
+      left: 0;
+      position: absolute;
+    }
+
+    &:hover:after {
+      opacity: 1;
+    }
+
+    &:hover {
+      opacity: 1;
+
+      [class^="card__itens--"] {
+        position: relative;
+
+        color: #fff;
+        z-index: 1;
+        opacity: 1;
+
+        -moz-transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+      }
+    }
+  }
+}

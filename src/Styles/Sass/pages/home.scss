@@ -1,6 +1,8 @@
 .home {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: auto;
+
+  padding: 10rem;
 
   display: flex;
   flex-direction: column;
@@ -12,7 +14,7 @@
     $color-primary-dark
   );
 
-  img {
+  &--img {
     width: 49.2rem;
     height: 14.9rem;
 
