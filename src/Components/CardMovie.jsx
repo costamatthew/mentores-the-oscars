@@ -3,7 +3,7 @@ import IconFavorite from "../Assets/Images/Icon-Guardar.png";
 export const CardMovie = ({ img, title, date }) => {
   return (
     <div className="card">
-      <div class="card__itens" style={{ backgroundImage: `url(${img})` }}>
+      <div className="card__itens" style={{ backgroundImage: `url(${img})` }}>
         <div className="card__itens--favorite">
           <img
             className="card__itens--favorite--img"
