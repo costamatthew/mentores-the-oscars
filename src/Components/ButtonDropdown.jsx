@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { requests } from "../Services/requests";
 
-export const ButtonDropdown = ({ SetTypeRequisition }) => {
+export const ButtonDropdown = ({ setPageNumber, SetTypeRequisition }) => {
   const [open, SetOpen] = useState(false);
 
   const { fetchTopRated, fetchActionMovies, fetchComedyMovies } = requests;
 
   function handleFilterMovie(requestName) {
+    setPageNumber(1);
     SetTypeRequisition(requestName);
   }
 

@@ -1,33 +1,49 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+
 import { API } from "../Services/api";
 import { requests } from "../Services/requests";
 
 import LogoOscars from "../Assets/Images/Logo-Oscars.png";
+import homeBg from "../Assets/Images/poligono.png";
 import { ButtonDropdown } from "../Components/ButtonDropdown";
 
 import { CardMovie } from "../Components/CardMovie";
-
-import { teste } from "../teste";
 
 export const HomePage = () => {
   const base_url = "https://image.tmdb.org/t/p/original/";
   const { fetchTrending } = requests;
   const [typeRequisition, SetTypeRequisition] = useState(fetchTrending);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(0);
   const [requestsApi, SetRequestsApi] = useState([]);
+  const [favoriteMovie, setFavoriteMovie] = useState([]);
+
+  function randomNumber() {
+    return Math.random() * (100 - 1) + 1;
+  }
 
   async function handleApiData(typeRequisition, pageNumber) {
     const request = await API.get(`${typeRequisition}&page=${pageNumber}`);
-    if (requestsApi.length === 0 || typeRequisition !== fetchTrending) {
-      return SetRequestsApi(request.data.results);
+    if (requestsApi.length === 0) {
+      return SetRequestsApi(
+        request.data.results.filter((item) => item.media_type === "movie")
+      );
     }
-    SetRequestsApi([...new Set([...requestsApi, ...request.data.results])]);
-    console.log(pageNumber);
+    SetRequestsApi([
+      ...new Set([
+        ...requestsApi,
+        ...request.data.results.filter((item) => item.media_type === "movie"),
+      ]),
+    ]);
   }
 
   useEffect(() => {
-    handleApiData(typeRequisition, pageNumber);
-    console.log(requestsApi);
+    if (pageNumber !== 0) {
+      handleApiData(typeRequisition, pageNumber);
+      setFavoriteMovie(
+        JSON.parse(localStorage.getItem("FavoriteMovies")) || []
+      );
+    }
+    // eslint-disable-next-line
   }, [pageNumber, typeRequisition]);
 
   useEffect(() => {
@@ -36,36 +52,34 @@ export const HomePage = () => {
         setPageNumber((currentValue) => currentValue + 1);
       }
     });
-    intersectionObserver.observe(document.querySelector("#sentinela"));
+    intersectionObserver.observe(document.querySelector("#Observer"));
     return () => intersectionObserver.disconnect();
   }, []);
 
   return (
     <main className="home">
-      <header>
+      <header style={{ backgroundImage: `url(${homeBg})` }}>
         <img className="home--img" src={LogoOscars} alt="Logo Oscars" />
-        <ButtonDropdown SetTypeRequisition={SetTypeRequisition} />
+        <div className="home--button">
+          <ButtonDropdown
+            setPageNumber={setPageNumber}
+            SetTypeRequisition={SetTypeRequisition}
+          />
+        </div>
       </header>
       <section className="section-movies">
-        <ul>
-          {requestsApi.map((res) => (
-            <CardMovie
-              key={res.id}
-              img={`${base_url}${res.poster_path}`}
-              title={res.title}
-              date={res.release_date}
-            />
-          ))}
-          <li id="sentinela"></li>
-        </ul>
-        {/* {requestsApi.map((result) => (
+        {requestsApi.map((result) => (
           <CardMovie
-            key={result.id}
+            key={`${result.id}${randomNumber()}`}
             img={`${base_url}${result.poster_path}`}
             title={result.title}
             date={result.release_date}
+            favoriteMovie={favoriteMovie}
+            pageNumber={pageNumber}
+            item={result}
           />
-        ))} */}
+        ))}
+        <div id="Observer"></div>
       </section>
     </main>
   );
