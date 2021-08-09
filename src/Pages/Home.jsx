@@ -79,8 +79,8 @@ export const HomePage = () => {
             item={result}
           />
         ))}
-        <div id="Observer"></div>
       </section>
+      <div id="Observer"></div>
     </main>
   );
 };
